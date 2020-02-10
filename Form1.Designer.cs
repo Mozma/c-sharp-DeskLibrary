@@ -38,22 +38,25 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.AddButton = new System.Windows.Forms.Button();
             this.libraryDataGridView = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.readingDataGridView = new System.Windows.Forms.DataGridView();
             this.libraryContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.читаюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.readingDataGridView = new System.Windows.Forms.DataGridView();
             this.readingContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.убратьИзСпискаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.переместитьВПрочитаноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alreadyReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.alreadyReadDataGridView = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.libraryTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.libraryDataGridView)).BeginInit();
+            this.libraryContextMenuStrip.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readingDataGridView)).BeginInit();
-            this.libraryContextMenuStrip.SuspendLayout();
             this.readingContextMenuStrip.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alreadyReadDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -173,43 +176,6 @@
             this.libraryDataGridView.Size = new System.Drawing.Size(538, 436);
             this.libraryDataGridView.TabIndex = 0;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.readingDataGridView);
-            this.tabPage2.Location = new System.Drawing.Point(154, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(678, 442);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Читаю";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(154, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(678, 442);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Прочитано";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // readingDataGridView
-            // 
-            this.readingDataGridView.AllowUserToAddRows = false;
-            this.readingDataGridView.AllowUserToDeleteRows = false;
-            this.readingDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.readingDataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.readingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.readingDataGridView.ContextMenuStrip = this.readingContextMenuStrip;
-            this.readingDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
-            this.readingDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.readingDataGridView.MultiSelect = false;
-            this.readingDataGridView.Name = "readingDataGridView";
-            this.readingDataGridView.ReadOnly = true;
-            this.readingDataGridView.Size = new System.Drawing.Size(538, 436);
-            this.readingDataGridView.TabIndex = 1;
-            // 
             // libraryContextMenuStrip
             // 
             this.libraryContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -232,25 +198,80 @@
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.delButton_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.readingDataGridView);
+            this.tabPage2.Location = new System.Drawing.Point(154, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(678, 442);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Читаю";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // readingDataGridView
+            // 
+            this.readingDataGridView.AllowUserToAddRows = false;
+            this.readingDataGridView.AllowUserToDeleteRows = false;
+            this.readingDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.readingDataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.readingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.readingDataGridView.ContextMenuStrip = this.readingContextMenuStrip;
+            this.readingDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.readingDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.readingDataGridView.MultiSelect = false;
+            this.readingDataGridView.Name = "readingDataGridView";
+            this.readingDataGridView.ReadOnly = true;
+            this.readingDataGridView.Size = new System.Drawing.Size(538, 436);
+            this.readingDataGridView.TabIndex = 1;
+            // 
             // readingContextMenuStrip
             // 
             this.readingContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.убратьИзСпискаToolStripMenuItem,
-            this.переместитьВПрочитаноToolStripMenuItem});
+            this.removeToolStripMenuItem,
+            this.alreadyReadToolStripMenuItem});
             this.readingContextMenuStrip.Name = "libraryContextMenuStrip";
-            this.readingContextMenuStrip.Size = new System.Drawing.Size(231, 48);
+            this.readingContextMenuStrip.Size = new System.Drawing.Size(231, 70);
             // 
-            // убратьИзСпискаToolStripMenuItem
+            // removeToolStripMenuItem
             // 
-            this.убратьИзСпискаToolStripMenuItem.Name = "убратьИзСпискаToolStripMenuItem";
-            this.убратьИзСпискаToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.убратьИзСпискаToolStripMenuItem.Text = "Убрать из списка";
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.removeToolStripMenuItem.Text = "Убрать из списка";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
-            // переместитьВПрочитаноToolStripMenuItem
+            // alreadyReadToolStripMenuItem
             // 
-            this.переместитьВПрочитаноToolStripMenuItem.Name = "переместитьВПрочитаноToolStripMenuItem";
-            this.переместитьВПрочитаноToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.переместитьВПрочитаноToolStripMenuItem.Text = "Переместить в \"Прочитано\"";
+            this.alreadyReadToolStripMenuItem.Name = "alreadyReadToolStripMenuItem";
+            this.alreadyReadToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.alreadyReadToolStripMenuItem.Text = "Переместить в \"Прочитано\"";
+            this.alreadyReadToolStripMenuItem.Click += new System.EventHandler(this.alreadyReadToolStripMenuItem_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.alreadyReadDataGridView);
+            this.tabPage3.Location = new System.Drawing.Point(154, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(678, 442);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Прочитано";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // alreadyReadDataGridView
+            // 
+            this.alreadyReadDataGridView.AllowUserToAddRows = false;
+            this.alreadyReadDataGridView.AllowUserToDeleteRows = false;
+            this.alreadyReadDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.alreadyReadDataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.alreadyReadDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.alreadyReadDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.alreadyReadDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.alreadyReadDataGridView.MultiSelect = false;
+            this.alreadyReadDataGridView.Name = "alreadyReadDataGridView";
+            this.alreadyReadDataGridView.ReadOnly = true;
+            this.alreadyReadDataGridView.Size = new System.Drawing.Size(538, 436);
+            this.alreadyReadDataGridView.TabIndex = 2;
             // 
             // Form1
             // 
@@ -267,10 +288,12 @@
             this.libraryTabPage.ResumeLayout(false);
             this.libraryTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.libraryDataGridView)).EndInit();
+            this.libraryContextMenuStrip.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.readingDataGridView)).EndInit();
-            this.libraryContextMenuStrip.ResumeLayout(false);
             this.readingContextMenuStrip.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.alreadyReadDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -293,8 +316,9 @@
         private System.Windows.Forms.ToolStripMenuItem читаюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip readingContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem убратьИзСпискаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem переместитьВПрочитаноToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alreadyReadToolStripMenuItem;
+        private System.Windows.Forms.DataGridView alreadyReadDataGridView;
     }
 }
 

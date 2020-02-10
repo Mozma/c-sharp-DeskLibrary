@@ -21,7 +21,7 @@ namespace c_sharp_DeskLibrary
         BinaryFormatter binFormatter = new BinaryFormatter();
         List<Book> books = new List<Book>();
         List<Book> reading = new List<Book>();
-     
+        List<Book> alreadyRead = new List<Book>();
         public void setUpDataGrid(DataGridView dg)
         {
 
@@ -40,6 +40,7 @@ namespace c_sharp_DeskLibrary
         {
             setUpDataGrid(libraryDataGridView);
             setUpDataGrid(readingDataGridView);
+            setUpDataGrid(alreadyReadDataGridView);
 
 
             foreach (var book in books)
@@ -47,62 +48,85 @@ namespace c_sharp_DeskLibrary
                 libraryDataGridView.Rows.Add(book.Name, book.Author, book.Id);
             }
 
-
             foreach (var book in reading)
             {
-                if(book.Status.ToLower().Equals("reading"))
-                    readingDataGridView.Rows.Add(book.Name, book.Author, book.Id);
+                readingDataGridView.Rows.Add(book.Name, book.Author, book.Id);
+            }
+
+            foreach (var book in alreadyRead)
+            {
+                alreadyReadDataGridView.Rows.Add(book.Name, book.Author, book.Id);
             }
 
             readingDataGridView.ClearSelection();
             libraryDataGridView.ClearSelection();
+            alreadyReadDataGridView.ClearSelection();
         }
-        
+        #region Save/Load
         /// <summary>
         /// Сохраняет все данные.
         /// </summary>
         public void SaveData()
         {
-            using (var file = new FileStream("books.bin", FileMode.OpenOrCreate))
-            {
-                binFormatter.Serialize(file, books);
-
-            }
-            using (var file = new FileStream("reading.bin", FileMode.OpenOrCreate))
-            {
-                binFormatter.Serialize(file, reading);
-            }
-           
+            serializeIt(books, "books.bin");
+            serializeIt(reading, "reading.bin");
+            serializeIt(alreadyRead, "alreadyRead.bin");
+            
         }
+
+        private void serializeIt(List<Book> tmp, string nameBin)
+        {
+            using (var file = new FileStream(nameBin, FileMode.OpenOrCreate))
+            {
+                binFormatter.Serialize(file, tmp);
+            }
+        }
+
         private void LoadData()
         {
             try
             {
+
                 using (var file = new FileStream("books.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
                     {
-                        books = newBooks;
-                        fillTable();
+                        books = newBooks;                        
                     }
 
                 }
+
                 using (var file = new FileStream("reading.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
                     {
-                        reading = newBooks;
-                        fillTable();
+                        reading = newBooks;                       
                     }
                 }
+
+                using (var file = new FileStream("alreadyRead.bin", FileMode.OpenOrCreate))
+                {
+                    var newBooks = binFormatter.Deserialize(file) as List<Book>;
+                    if (newBooks != null)
+                    {
+                        alreadyRead = newBooks;
+            
+                    }
+                }
+
+                fillTable();
             }
             catch (Exception) { }
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveData();
+        }
 
-
+        #endregion
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -113,9 +137,14 @@ namespace c_sharp_DeskLibrary
             }
 
             fillTable();
-           // Console.WriteLine();
+      
         }
 
+        /// <summary>
+        /// Удаление выбранного элемента из books.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void delButton_Click(object sender, EventArgs e)
         {
             try
@@ -176,18 +205,52 @@ namespace c_sharp_DeskLibrary
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveData();
-        }
-
       
 
+        /// <summary>
+        /// Кнопка контекстного меню "Добавить в "Читаю" ".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void readingButton_Click(object sender, EventArgs e)
         {
             var book = books[libraryDataGridView.CurrentCell.RowIndex];
-            book.Status = "reading";
+      
             reading.Add(book);
+
+            fillTable();
+        }
+
+        /// <summary>
+        /// Кнопка - Убрать из Читаю.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
+           
+            for (int i = 0; i < reading.Count; i++) 
+            {
+                if (reading[i].Id.Equals(tmp))
+                    reading.RemoveAt(i);
+            }
+
+            fillTable();
+           
+        }
+
+        private void alreadyReadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var book = reading[readingDataGridView.CurrentCell.RowIndex];
+
+            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
+            alreadyRead.Add(book);
+            for (int i = 0; i < reading.Count; i++)
+            {
+                if (reading[i].Id.Equals(tmp))
+                    reading.RemoveAt(i);
+            }
 
             fillTable();
         }
