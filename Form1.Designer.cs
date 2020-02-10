@@ -48,6 +48,8 @@
             this.alreadyReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.alreadyReadDataGridView = new System.Windows.Forms.DataGridView();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ChangeProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.libraryTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.libraryDataGridView)).BeginInit();
@@ -57,30 +59,34 @@
             this.readingContextMenuStrip.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alreadyReadDataGridView)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.libraryTabPage);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControl1.ItemSize = new System.Drawing.Size(30, 150);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 22);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(836, 450);
+            this.tabControl1.Size = new System.Drawing.Size(836, 427);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // libraryTabPage
             // 
+            this.libraryTabPage.BackColor = System.Drawing.SystemColors.Window;
             this.libraryTabPage.Controls.Add(this.delButton);
             this.libraryTabPage.Controls.Add(this.authorTextBox);
             this.libraryTabPage.Controls.Add(this.nameTextBox);
@@ -92,14 +98,14 @@
             this.libraryTabPage.Location = new System.Drawing.Point(154, 4);
             this.libraryTabPage.Name = "libraryTabPage";
             this.libraryTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.libraryTabPage.Size = new System.Drawing.Size(678, 442);
+            this.libraryTabPage.Size = new System.Drawing.Size(678, 419);
             this.libraryTabPage.TabIndex = 0;
             this.libraryTabPage.Text = "Библиотека";
-            this.libraryTabPage.UseVisualStyleBackColor = true;
             // 
             // delButton
             // 
             this.delButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.delButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.delButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.delButton.Location = new System.Drawing.Point(547, 140);
             this.delButton.Name = "delButton";
@@ -151,6 +157,7 @@
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddButton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddButton.Location = new System.Drawing.Point(547, 106);
             this.AddButton.Name = "AddButton";
@@ -164,16 +171,19 @@
             // 
             this.libraryDataGridView.AllowUserToAddRows = false;
             this.libraryDataGridView.AllowUserToDeleteRows = false;
+            this.libraryDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.libraryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.libraryDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.libraryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.libraryDataGridView.ContextMenuStrip = this.libraryContextMenuStrip;
-            this.libraryDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.libraryDataGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.libraryDataGridView.Location = new System.Drawing.Point(3, 3);
             this.libraryDataGridView.MultiSelect = false;
             this.libraryDataGridView.Name = "libraryDataGridView";
             this.libraryDataGridView.ReadOnly = true;
-            this.libraryDataGridView.Size = new System.Drawing.Size(538, 436);
+            this.libraryDataGridView.Size = new System.Drawing.Size(538, 413);
             this.libraryDataGridView.TabIndex = 0;
             // 
             // libraryContextMenuStrip
@@ -204,7 +214,7 @@
             this.tabPage2.Location = new System.Drawing.Point(154, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(678, 442);
+            this.tabPage2.Size = new System.Drawing.Size(678, 247);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Читаю";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -213,16 +223,18 @@
             // 
             this.readingDataGridView.AllowUserToAddRows = false;
             this.readingDataGridView.AllowUserToDeleteRows = false;
+            this.readingDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.readingDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.readingDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.readingDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.readingDataGridView.ContextMenuStrip = this.readingContextMenuStrip;
-            this.readingDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.readingDataGridView.Location = new System.Drawing.Point(3, 3);
             this.readingDataGridView.MultiSelect = false;
             this.readingDataGridView.Name = "readingDataGridView";
             this.readingDataGridView.ReadOnly = true;
-            this.readingDataGridView.Size = new System.Drawing.Size(538, 436);
+            this.readingDataGridView.Size = new System.Drawing.Size(538, 408);
             this.readingDataGridView.TabIndex = 1;
             // 
             // readingContextMenuStrip
@@ -231,7 +243,7 @@
             this.removeToolStripMenuItem,
             this.alreadyReadToolStripMenuItem});
             this.readingContextMenuStrip.Name = "libraryContextMenuStrip";
-            this.readingContextMenuStrip.Size = new System.Drawing.Size(231, 70);
+            this.readingContextMenuStrip.Size = new System.Drawing.Size(231, 48);
             // 
             // removeToolStripMenuItem
             // 
@@ -253,7 +265,7 @@
             this.tabPage3.Location = new System.Drawing.Point(154, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(678, 442);
+            this.tabPage3.Size = new System.Drawing.Size(678, 247);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Прочитано";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -262,16 +274,36 @@
             // 
             this.alreadyReadDataGridView.AllowUserToAddRows = false;
             this.alreadyReadDataGridView.AllowUserToDeleteRows = false;
+            this.alreadyReadDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.alreadyReadDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.alreadyReadDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.alreadyReadDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.alreadyReadDataGridView.Dock = System.Windows.Forms.DockStyle.Left;
             this.alreadyReadDataGridView.Location = new System.Drawing.Point(3, 3);
             this.alreadyReadDataGridView.MultiSelect = false;
             this.alreadyReadDataGridView.Name = "alreadyReadDataGridView";
             this.alreadyReadDataGridView.ReadOnly = true;
-            this.alreadyReadDataGridView.Size = new System.Drawing.Size(538, 436);
+            this.alreadyReadDataGridView.Size = new System.Drawing.Size(538, 408);
             this.alreadyReadDataGridView.TabIndex = 2;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ChangeProfileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(836, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ChangeProfileToolStripMenuItem
+            // 
+            this.ChangeProfileToolStripMenuItem.Name = "ChangeProfileToolStripMenuItem";
+            this.ChangeProfileToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
+            this.ChangeProfileToolStripMenuItem.Text = "Сменить профиль";
+            this.ChangeProfileToolStripMenuItem.Click += new System.EventHandler(this.ChangeProfileToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -279,7 +311,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(836, 450);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControl1);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "DeskLibrary";
@@ -294,7 +328,10 @@
             this.readingContextMenuStrip.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.alreadyReadDataGridView)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -319,6 +356,8 @@
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alreadyReadToolStripMenuItem;
         private System.Windows.Forms.DataGridView alreadyReadDataGridView;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ChangeProfileToolStripMenuItem;
     }
 }
 

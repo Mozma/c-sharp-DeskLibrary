@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace c_sharp_DeskLibrary
 {
     public partial class Form1 : Form
-    {             
+    {
 
         public Form1()
         {
@@ -17,11 +17,23 @@ namespace c_sharp_DeskLibrary
             tabControl1.DrawItem += new DrawItemEventHandler(tabControl1_DrawItem);
 
             LoadData();
+
         }
+        
+        #region Дополнительные перменные
+        
         BinaryFormatter binFormatter = new BinaryFormatter();
+
+        //List<Profile> users = new List<Profile>();
+        Profile user = new Profile("Admin");
+
         List<Book> books = new List<Book>();
         List<Book> reading = new List<Book>();
         List<Book> alreadyRead = new List<Book>();
+
+        #endregion
+
+        #region Настройка таблиц
         public void setUpDataGrid(DataGridView dg)
         {
 
@@ -44,7 +56,7 @@ namespace c_sharp_DeskLibrary
 
 
             foreach (var book in books)
-            {  
+            {
                 libraryDataGridView.Rows.Add(book.Name, book.Author, book.Id);
             }
 
@@ -62,15 +74,18 @@ namespace c_sharp_DeskLibrary
             libraryDataGridView.ClearSelection();
             alreadyReadDataGridView.ClearSelection();
         }
+
+        #endregion
+
         #region Save/Load
         /// <summary>
         /// Сохраняет все данные.
         /// </summary>
         public void SaveData()
         {
-            serializeIt(books, "books.bin");
-            serializeIt(reading, "reading.bin");
-            serializeIt(alreadyRead, "alreadyRead.bin");
+            serializeIt(books,       user.DirectoryPath + @"\books.bin");
+            serializeIt(reading,     user.DirectoryPath + @"\reading.bin");
+            serializeIt(alreadyRead, user.DirectoryPath + @"\alreadyRead.bin");
             
         }
 
@@ -87,7 +102,7 @@ namespace c_sharp_DeskLibrary
             try
             {
 
-                using (var file = new FileStream("books.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(user.DirectoryPath + @"\books.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -97,7 +112,7 @@ namespace c_sharp_DeskLibrary
 
                 }
 
-                using (var file = new FileStream("reading.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(user.DirectoryPath + @"\reading.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -106,7 +121,7 @@ namespace c_sharp_DeskLibrary
                     }
                 }
 
-                using (var file = new FileStream("alreadyRead.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(user.DirectoryPath + @"\alreadyRead.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -128,6 +143,7 @@ namespace c_sharp_DeskLibrary
 
         #endregion
 
+        #region Кнопки
         private void addButton_Click(object sender, EventArgs e)
         {
             //проверки 
@@ -167,6 +183,55 @@ namespace c_sharp_DeskLibrary
             }
         }
 
+        /// <summary>
+        /// Кнопка контекстного меню "Добавить в "Читаю" ".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void readingButton_Click(object sender, EventArgs e)
+        {
+            var book = books[libraryDataGridView.CurrentCell.RowIndex];
+
+            reading.Add(book);
+
+            fillTable();
+        }
+
+        /// <summary>
+        /// Кнопка - Убрать из Читаю.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
+
+            for (int i = 0; i < reading.Count; i++)
+            {
+                if (reading[i].Id.Equals(tmp))
+                    reading.RemoveAt(i);
+            }
+
+            fillTable();
+
+        }
+
+        private void alreadyReadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var book = reading[readingDataGridView.CurrentCell.RowIndex];
+
+            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
+            alreadyRead.Add(book);
+            for (int i = 0; i < reading.Count; i++)
+            {
+                if (reading[i].Id.Equals(tmp))
+                    reading.RemoveAt(i);
+            }
+
+            fillTable();
+        }
+
+#endregion
 
         /// <summary>
         ///  Method for drawing items of tabControl on the left side
@@ -203,56 +268,13 @@ namespace c_sharp_DeskLibrary
             _stringFlags.Alignment = StringAlignment.Center;
             _stringFlags.LineAlignment = StringAlignment.Center;
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+
+          
         }
 
-      
-
-        /// <summary>
-        /// Кнопка контекстного меню "Добавить в "Читаю" ".
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void readingButton_Click(object sender, EventArgs e)
+        private void ChangeProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var book = books[libraryDataGridView.CurrentCell.RowIndex];
-      
-            reading.Add(book);
-
-            fillTable();
-        }
-
-        /// <summary>
-        /// Кнопка - Убрать из Читаю.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
-           
-            for (int i = 0; i < reading.Count; i++) 
-            {
-                if (reading[i].Id.Equals(tmp))
-                    reading.RemoveAt(i);
-            }
-
-            fillTable();
-           
-        }
-
-        private void alreadyReadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var book = reading[readingDataGridView.CurrentCell.RowIndex];
-
-            var tmp = readingDataGridView[2, readingDataGridView.CurrentCell.RowIndex].Value;
-            alreadyRead.Add(book);
-            for (int i = 0; i < reading.Count; i++)
-            {
-                if (reading[i].Id.Equals(tmp))
-                    reading.RemoveAt(i);
-            }
-
-            fillTable();
+            Profile pr = new Profile("ss");
         }
     }
 }
