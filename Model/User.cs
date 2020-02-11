@@ -7,25 +7,31 @@ using System.Windows.Forms;
 
 namespace c_sharp_DeskLibrary
 {
-    class Profile
+    class User
     {
         public string ID { get; }
         public string Username { get; }
         public string DirectoryPath { get; set; }
 
 
-        public Profile(string username)
+        public User(string username)
         {
             Username = username;
             ID = Guid.NewGuid().ToString();
+            DirectoryPath = getDirectoryPath();
+        }
 
-            DirectoryPath = AppDomain.CurrentDomain.BaseDirectory  + $@"Profiles\{Username}";//Assembly.GetExecutingAssembly().Location;
+
+        private string getDirectoryPath()
+        {
+           var str = AppDomain.CurrentDomain.BaseDirectory + $@"Profiles\{Username}";//Assembly.GetExecutingAssembly().Location;
 
             if (!Directory.Exists(DirectoryPath)) // Путь
             {
                 Directory.CreateDirectory(DirectoryPath); // Если нет - создаем
             }
 
+            return str;
             //MessageBox.Show(UserDirectoryPath);
         }
     }

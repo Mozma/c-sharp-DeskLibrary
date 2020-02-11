@@ -25,7 +25,7 @@ namespace c_sharp_DeskLibrary
         BinaryFormatter binFormatter = new BinaryFormatter();
 
         //List<Profile> users = new List<Profile>();
-        Profile user = new Profile("Admin");
+        User user = new User("Admin");
 
         List<Book> books = new List<Book>();
         List<Book> reading = new List<Book>();
@@ -274,7 +274,7 @@ namespace c_sharp_DeskLibrary
 
         private void ChangeProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Profile pr = new Profile("ss");
+            User pr = new User("ss");
         }
     }
 }
