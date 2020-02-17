@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace c_sharp_DeskLibrary.Controller
 {
@@ -13,9 +12,6 @@ namespace c_sharp_DeskLibrary.Controller
         public List<User> Users { get; }
         public User CurrentUser { get; }
  
-
-
-
         public UserController(string userName)
         {
             if (string.IsNullOrEmpty(userName))

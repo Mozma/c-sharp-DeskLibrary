@@ -1,4 +1,5 @@
-﻿using System;
+﻿using c_sharp_DeskLibrary.Controller;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -25,8 +26,9 @@ namespace c_sharp_DeskLibrary
         BinaryFormatter binFormatter = new BinaryFormatter();
 
         //List<Profile> users = new List<Profile>();
-        User user = new User("Admin");
-
+        //User user = new User("Admin");
+        UserController userCtrl = new UserController("Admin");
+        
         List<Book> books = new List<Book>();
         List<Book> reading = new List<Book>();
         List<Book> alreadyRead = new List<Book>();
@@ -83,9 +85,10 @@ namespace c_sharp_DeskLibrary
         /// </summary>
         public void SaveData()
         {
-            serializeIt(books,       user.DirectoryPath + @"\books.bin");
-            serializeIt(reading,     user.DirectoryPath + @"\reading.bin");
-            serializeIt(alreadyRead, user.DirectoryPath + @"\alreadyRead.bin");
+            var path = userCtrl.CurrentUser.DirectoryPath;
+            serializeIt(books,       path + @"\books.bin");
+            serializeIt(reading,     path + @"\reading.bin");
+            serializeIt(alreadyRead, path + @"\alreadyRead.bin");
             
         }
 
@@ -101,8 +104,9 @@ namespace c_sharp_DeskLibrary
         {
             try
             {
+                var path = userCtrl.CurrentUser.DirectoryPath;
 
-                using (var file = new FileStream(user.DirectoryPath + @"\books.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(path + @"\books.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -112,7 +116,7 @@ namespace c_sharp_DeskLibrary
 
                 }
 
-                using (var file = new FileStream(user.DirectoryPath + @"\reading.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(path + @"\reading.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -121,7 +125,7 @@ namespace c_sharp_DeskLibrary
                     }
                 }
 
-                using (var file = new FileStream(user.DirectoryPath + @"\alreadyRead.bin", FileMode.OpenOrCreate))
+                using (var file = new FileStream(path + @"\alreadyRead.bin", FileMode.OpenOrCreate))
                 {
                     var newBooks = binFormatter.Deserialize(file) as List<Book>;
                     if (newBooks != null)
@@ -274,7 +278,7 @@ namespace c_sharp_DeskLibrary
 
         private void ChangeProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            User pr = new User("ss");
+           // User pr = new User("ss");
         }
     }
 }

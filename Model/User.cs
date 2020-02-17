@@ -1,12 +1,10 @@
-﻿
-
-using System;
+﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
+
 
 namespace c_sharp_DeskLibrary
 {
+    [Serializable]
     class User
     {
         public string ID { get; }
@@ -21,14 +19,13 @@ namespace c_sharp_DeskLibrary
             DirectoryPath = getDirectoryPath();
         }
 
-
         private string getDirectoryPath()
         {
            var str = AppDomain.CurrentDomain.BaseDirectory + $@"Profiles\{Username}";//Assembly.GetExecutingAssembly().Location;
 
-            if (!Directory.Exists(DirectoryPath)) // Путь
+            if (!Directory.Exists(str)) // Путь
             {
-                Directory.CreateDirectory(DirectoryPath); // Если нет - создаем
+                Directory.CreateDirectory(str); // Если нет - создаем
             }
 
             return str;
